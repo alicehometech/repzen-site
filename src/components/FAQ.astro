@@ -1,48 +1,28 @@
 ---
+import type { Dict, Locale } from '~/i18n';
+import { localePath } from '~/i18n';
+
+interface Props {
+  t: Dict;
+  lang: Locale;
+}
+const { t, lang } = Astro.props;
+
 const TESTFLIGHT = 'https://testflight.apple.com/join/T4ygaWD7';
 const EMAIL = 'mailto:lasmarthome18@gmail.com';
-
-const faqs = [
-  {
-    q: 'Is RepZen the most accurate rep counter?',
-    a: "No, and we don't claim to be. Big-budget apps with cloud ML and millions of users will catch counts ours can miss. RepZen's bet is on transparency, privacy, and a sensitivity slider you control — not on being the absolute best at every exercise.",
-  },
-  {
-    q: 'Why do pull-ups count poorly?',
-    a: "On a strict pull-up the wrist barely moves — there's not enough signal in the accelerometer or gyroscope to trigger reliably. We mark pull-ups (and certain dips) as manual-only rather than guess. A future version may use the barometer for height-based detection.",
-  },
-  {
-    q: 'What if the count is wrong?',
-    a: 'Every exercise has a sensitivity slider from 1 to 10. Bump it up if reps are missed, drop it if you get false counts. Live diagnostics on the Watch show wrist tilt and rotation in real time, so you can see what the algorithm is detecting and dial it in.',
-  },
-  {
-    q: 'Does any data leave my device?',
-    a: "Not unless you turn on Apple Health sync. RepZen has no servers, no accounts, no analytics, and no advertising identifiers. Workouts and motion data stay on your iPhone and Watch. If you grant Health permission, those workouts flow into Apple Health on your device, governed by Apple's privacy framework.",
-  },
-  {
-    q: 'How much does it cost?',
-    a: "Free. No ads. No in-app purchases. No subscription. It's built by one developer who didn't want yet another paywalled fitness app.",
-  },
-  {
-    q: 'When is it on the App Store?',
-    a: "It's in TestFlight beta now (v0.1.x). The App Store launch will follow once the rep counters are tuned across more bodies, more exercise variations, and more form quality. Join the beta to help us get there.",
-  },
-];
 ---
 
 <section id="faq" class="section bg-[var(--card-soft)]">
   <div class="container-page">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="eyebrow mb-4">Honest answers</p>
-      <h2 class="h2 mb-4">FAQ</h2>
-      <p class="lede">
-        We'd rather tell you what doesn't work than oversell what does.
-      </p>
+      <p class="eyebrow mb-4">{t.faq.eyebrow}</p>
+      <h2 class="h2 mb-4">{t.faq.title}</h2>
+      <p class="lede">{t.faq.lede}</p>
     </div>
 
     <div class="mx-auto mt-12 max-w-3xl divide-y divide-[var(--line)] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--card)]">
       {
-        faqs.map((f, i) => (
+        t.faq.items.map((f, i) => (
           <details class="group" open={i === 0}>
             <summary class="flex cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 text-left text-base font-semibold transition hover:bg-[var(--card-soft)] sm:px-8">
               <span>{f.q}</span>
@@ -72,15 +52,13 @@ const faqs = [
 
     <div class="mx-auto mt-12 max-w-2xl text-center">
       <p class="text-sm text-[var(--fg-muted)]">
-        Have a question we didn't answer?{' '}
-        <a href={EMAIL} class="font-semibold text-brand-accent hover:underline">
-          Email the developer
-        </a>{' '}
-        or{' '}
+        {t.faq.outroLead}
+        <a href={EMAIL} class="font-semibold text-brand-accent hover:underline">{t.faq.outroEmail}</a>
+        {t.faq.outroOr}
         <a href={TESTFLIGHT} target="_blank" rel="noopener" class="font-semibold text-brand-accent hover:underline">
-          join the beta
+          {t.faq.outroJoin}
         </a>
-        .
+        {t.faq.outroTrail}
       </p>
     </div>
   </div>

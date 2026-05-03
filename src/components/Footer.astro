@@ -1,7 +1,18 @@
 ---
+import type { Dict, Locale } from '~/i18n';
+import { localePath } from '~/i18n';
+
+interface Props {
+  t: Dict;
+  lang: Locale;
+}
+const { t, lang } = Astro.props;
+
 const GH = 'https://github.com/alicehometech/repzen';
 const EMAIL = 'mailto:lasmarthome18@gmail.com';
 const year = new Date().getFullYear();
+const privacyHref = localePath(lang, 'privacy');
+const copyright = t.footer.copyright.replace('{year}', String(year));
 ---
 
 <footer class="border-t border-[var(--line)] py-12">
@@ -21,15 +32,14 @@ const year = new Date().getFullYear();
       </div>
 
       <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[var(--fg-muted)]">
-        <a href="/privacy" class="transition hover:text-[var(--fg)]">Privacy</a>
-        <a href={EMAIL} class="transition hover:text-[var(--fg)]">Contact</a>
-        <a href={GH} class="transition hover:text-[var(--fg)]" target="_blank" rel="noopener">GitHub</a>
+        <a href={privacyHref} class="transition hover:text-[var(--fg)]">{t.footer.privacy}</a>
+        <a href={EMAIL} class="transition hover:text-[var(--fg)]">{t.footer.contact}</a>
+        <a href={GH} class="transition hover:text-[var(--fg)]" target="_blank" rel="noopener">
+          {t.footer.github}
+        </a>
       </nav>
     </div>
 
-    <p class="mt-8 text-xs text-[var(--fg-soft)]">
-      © {year} RepZen. Built by one developer. Apple Watch, iPhone, and Apple Health are
-      trademarks of Apple Inc.
-    </p>
+    <p class="mt-8 text-xs text-[var(--fg-soft)]">{copyright}</p>
   </div>
 </footer>

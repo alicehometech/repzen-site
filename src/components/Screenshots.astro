@@ -1,44 +1,38 @@
 ---
-const shots = [
-  { label: 'Home', kind: 'phone' as const, blurb: 'Today\'s plan + activity' },
-  { label: 'Live count', kind: 'watch' as const, blurb: 'Reps tick on your wrist' },
-  { label: 'Plan editor', kind: 'phone' as const, blurb: 'Build a workout once' },
-  { label: 'Diagnostics', kind: 'watch' as const, blurb: 'See what\'s detecting' },
-];
+import type { Dict } from '~/i18n';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+
+const kinds = ['phone', 'watch', 'phone', 'watch'] as const;
 ---
 
 <section class="section bg-[var(--card-soft)]">
   <div class="container-page">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="eyebrow mb-4">Screenshots</p>
-      <h2 class="h2 mb-4">Real screens, coming soon.</h2>
-      <p class="lede">
-        We're polishing the UI before pinning the marketing screenshots. Join the beta
-        to see the real thing in motion.
-      </p>
+      <p class="eyebrow mb-4">{t.shots.eyebrow}</p>
+      <h2 class="h2 mb-4">{t.shots.title}</h2>
+      <p class="lede">{t.shots.lede}</p>
     </div>
 
     <div class="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
       {
-        shots.map((s) => (
+        t.shots.items.map((s, i) => (
           <div class="flex flex-col items-center gap-3">
             <div
               class:list={[
                 'relative w-full overflow-hidden border border-[var(--line-strong)] bg-[var(--card)]',
-                s.kind === 'phone'
+                kinds[i] === 'phone'
                   ? 'aspect-[9/19] rounded-[28px]'
                   : 'aspect-[1/1.18] rounded-[28px]',
               ]}
             >
-              <div
-                class="absolute inset-0 bg-brand-gradient-soft"
-                aria-hidden="true"
-              ></div>
+              <div class="absolute inset-0 bg-brand-gradient-soft" aria-hidden="true" />
               <div class="absolute inset-0 flex items-center justify-center">
-                <span
-                  class="rounded-full border border-[var(--line-strong)] bg-[var(--card)]/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--fg-muted)] backdrop-blur"
-                >
-                  Coming soon
+                <span class="rounded-full border border-[var(--line-strong)] bg-[var(--card)]/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--fg-muted)] backdrop-blur">
+                  {t.shots.coming}
                 </span>
               </div>
             </div>

@@ -1,0 +1,108 @@
+---
+import type { Dict } from '~/i18n';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const p = t.privacyPage;
+---
+
+<article class="prose-page mx-auto max-w-3xl" data-testid="privacy-article">
+  <p class="eyebrow mb-4">{p.eyebrow}</p>
+  <h1 class="h1 mb-3 !text-4xl">{p.title}</h1>
+  <p class="text-sm text-[var(--fg-soft)]">{p.lastUpdated}</p>
+
+  {p.notice && (
+    <div class="mt-6 rounded-xl border border-[var(--line)] bg-[var(--card-soft)] px-4 py-3 text-sm text-[var(--fg-muted)]">
+      {p.notice}
+    </div>
+  )}
+
+  <p class="lede mt-8" set:html={p.intro} />
+
+  <h2>{p.sections.collect.title}</h2>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th>{p.sections.collect.columns.data}</th>
+          <th>{p.sections.collect.columns.source}</th>
+          <th>{p.sections.collect.columns.why}</th>
+          <th>{p.sections.collect.columns.where}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {p.sections.collect.rows.map((row) => (
+          <tr>
+            <td>{row.data}</td>
+            <td>{row.source}</td>
+            <td>{row.why}</td>
+            <td>{row.where}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>{p.sections.donot.title}</h2>
+  <ul>
+    {p.sections.donot.items.map((item) => (
+      <li set:html={item} />
+    ))}
+  </ul>
+
+  <h2>{p.sections.health.title}</h2>
+  <p set:html={p.sections.health.bodyA} />
+  <p set:html={p.sections.health.revoke} />
+
+  <h2>{p.sections.music.title}</h2>
+  <p set:html={p.sections.music.body} />
+
+  <h2>{p.sections.sync.title}</h2>
+  <p set:html={p.sections.sync.body} />
+
+  <h2>{p.sections.children.title}</h2>
+  <p set:html={p.sections.children.body} />
+
+  <h2>{p.sections.changes.title}</h2>
+  <p set:html={p.sections.changes.body} />
+
+  <h2>{p.sections.contact.title}</h2>
+  <p set:html={p.sections.contact.body} />
+</article>
+
+<style is:global>
+  .prose-page h2 {
+    @apply mt-12 mb-4 text-2xl font-bold tracking-tight;
+  }
+  .prose-page p {
+    @apply mt-4 text-[16px] leading-relaxed text-[var(--fg-muted)];
+  }
+  .prose-page ul {
+    @apply mt-4 space-y-2 pl-5 text-[16px] leading-relaxed text-[var(--fg-muted)];
+    list-style: disc;
+  }
+  .prose-page strong {
+    color: var(--fg);
+  }
+  .prose-page a {
+    color: #1a6fff;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+  }
+  .prose-page code {
+    @apply rounded bg-[var(--card-soft)] px-1.5 py-0.5 text-[0.92em] font-mono;
+  }
+  .prose-page table {
+    @apply mt-6 w-full border-collapse text-sm;
+  }
+  .prose-page th,
+  .prose-page td {
+    @apply border border-[var(--line)] px-3 py-2 text-left align-top text-[var(--fg-muted)];
+  }
+  .prose-page th {
+    @apply bg-[var(--card-soft)] font-semibold text-[var(--fg)];
+  }
+</style>

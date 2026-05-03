@@ -1,12 +1,15 @@
 ---
 import '~/styles/global.css';
+import type { Locale } from '~/i18n';
+import { locales, hreflang, defaultLocale, localePath } from '~/i18n';
 
 interface Props {
   title: string;
   description: string;
   ogTitle?: string;
   ogDescription?: string;
-  path?: string;
+  lang: Locale;
+  page?: '' | 'privacy';
 }
 
 const {
@@ -14,16 +17,26 @@ const {
   description,
   ogTitle = title,
   ogDescription = description,
-  path = '/',
+  lang,
+  page = '',
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
-const canonical = siteUrl + path;
+const path = localePath(lang, page);
+const canonical = siteUrl + (path === '/' ? '/' : path);
 const ogImage = siteUrl + '/og-image.png';
+const htmlLang = hreflang[lang];
+
+const alternates = locales.map((loc) => {
+  const p = localePath(loc, page);
+  return { loc, hreflang: hreflang[loc], href: siteUrl + (p === '/' ? '/' : p) };
+});
+const xDefaultPath = localePath(defaultLocale, page);
+const xDefaultHref = siteUrl + (xDefaultPath === '/' ? '/' : xDefaultPath);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -32,6 +45,11 @@ const ogImage = siteUrl + '/og-image.png';
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
     <link rel="icon" type="image/png" href="/icons/repzen-icon-1024.png" />
     <link rel="apple-touch-icon" href="/icons/repzen-icon-1024.png" />
@@ -45,6 +63,10 @@ const ogImage = siteUrl + '/og-image.png';
     <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content="RepZen" />
+    <meta property="og:locale" content={htmlLang.replace('-', '_')} />
+    {alternates.filter((a) => a.loc !== lang).map((a) => (
+      <meta property="og:locale:alternate" content={a.hreflang.replace('-', '_')} />
+    ))}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />
@@ -55,7 +77,7 @@ const ogImage = siteUrl + '/og-image.png';
 
     <slot name="head" />
   </head>
-  <body class="font-sans">
+  <body class="font-sans" data-locale={lang}>
     <slot />
   </body>
 </html>

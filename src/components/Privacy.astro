@@ -1,30 +1,13 @@
 ---
-const points = [
-  {
-    title: 'No servers',
-    body: 'There is nowhere for your data to go even if we wanted it. RepZen has no backend.',
-  },
-  {
-    title: 'No accounts',
-    body: 'No sign-up, no email, no login. Install, grant motion permission, start counting.',
-  },
-  {
-    title: 'No analytics',
-    body: 'No tracking SDKs, no advertising IDs, no telemetry. Not Plausible. Nothing.',
-  },
-  {
-    title: 'No data leaves your device',
-    body: 'Motion, heart rate, and workouts stay on your iPhone and Watch. Period.',
-  },
-  {
-    title: 'Apple Health, optional',
-    body: 'Sync workouts to Apple Health if you want to. Otherwise nothing leaves the app.',
-  },
-  {
-    title: 'Free, no ads, no IAP',
-    body: 'Built by one developer. No subscription, no upsell, no premium tier.',
-  },
-];
+import type { Dict, Locale } from '~/i18n';
+import { localePath } from '~/i18n';
+
+interface Props {
+  t: Dict;
+  lang: Locale;
+}
+const { t, lang } = Astro.props;
+const privacyHref = localePath(lang, 'privacy');
 ---
 
 <section id="privacy" class="section relative overflow-hidden">
@@ -37,20 +20,16 @@ const points = [
 
   <div class="container-page">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow mb-4">Privacy by design</p>
+      <p class="eyebrow mb-4">{t.privacy.eyebrow}</p>
       <h2 class="h2 mb-4">
-        Your motion. <span class="text-gradient">Your wrist.</span>
-        Your business.
+        {t.privacy.titleA} <span class="text-gradient">{t.privacy.titleB}</span> {t.privacy.titleC}
       </h2>
-      <p class="lede">
-        Most fitness apps push your data to a cloud — for sync, for analytics, for
-        monetization, "for backup." RepZen doesn't.
-      </p>
+      <p class="lede">{t.privacy.lede}</p>
     </div>
 
     <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
       {
-        points.map((p) => (
+        t.privacy.points.map((p) => (
           <li class="card flex gap-4">
             <span
               aria-hidden="true"
@@ -71,10 +50,11 @@ const points = [
 
     <div class="mt-10 text-center">
       <a
-        href="/privacy"
+        href={privacyHref}
         class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent hover:underline"
+        data-testid="cta-privacy-full"
       >
-        Read the full privacy policy
+        {t.privacy.cta}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"

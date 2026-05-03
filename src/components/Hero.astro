@@ -1,14 +1,17 @@
 ---
+import type { Dict } from '~/i18n';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+
 const TESTFLIGHT = 'https://testflight.apple.com/join/T4ygaWD7';
 const GH = 'https://github.com/alicehometech/repzen';
 ---
 
 <section class="relative overflow-hidden">
-  <!-- Background gradient wash -->
-  <div
-    class="pointer-events-none absolute inset-0 -z-10"
-    aria-hidden="true"
-  >
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
     <div
       class="absolute left-1/2 top-[-10%] h-[480px] w-[800px] -translate-x-1/2 rounded-full opacity-[0.18] blur-3xl"
       style="background: radial-gradient(closest-side, #0A84FF 0%, transparent 70%);"
@@ -24,21 +27,17 @@ const GH = 'https://github.com/alicehometech/repzen';
   <div class="container-page pt-16 pb-20 sm:pt-24 sm:pb-28">
     <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
       <div class="lg:col-span-7">
-        <p class="eyebrow mb-5">Apple Watch · iPhone</p>
+        <p class="eyebrow mb-5">{t.hero.eyebrow}</p>
         <h1 class="h1 mb-6">
-          Counts your reps.
+          {t.hero.titleA}
           <br class="hidden sm:block" />
-          <span class="text-gradient">Stays on your wrist.</span>
+          <span class="text-gradient">{t.hero.titleB}</span>
         </h1>
-        <p class="lede max-w-xl">
-          RepZen counts your push-ups, sit-ups, squats, and seven other bodyweight exercises
-          automatically — using nothing but your Apple Watch's motion sensors. No buttons during
-          a set. No accounts. No data leaving your device. Ever.
-        </p>
+        <p class="lede max-w-xl">{t.hero.body}</p>
 
         <div class="mt-9 flex flex-wrap items-center gap-3">
-          <a href={TESTFLIGHT} class="btn-primary" target="_blank" rel="noopener">
-            Join TestFlight beta
+          <a href={TESTFLIGHT} class="btn-primary" target="_blank" rel="noopener" data-testid="cta-testflight">
+            {t.hero.primary}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -55,7 +54,7 @@ const GH = 'https://github.com/alicehometech/repzen';
               <path d="m13 6 6 6-6 6"></path>
             </svg>
           </a>
-          <a href={GH} class="btn-secondary" target="_blank" rel="noopener">
+          <a href={GH} class="btn-secondary" target="_blank" rel="noopener" data-testid="cta-github">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -68,18 +67,15 @@ const GH = 'https://github.com/alicehometech/repzen';
                 d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
               ></path>
             </svg>
-            View on GitHub
+            {t.hero.secondary}
           </a>
         </div>
 
-        <p class="mt-6 text-sm text-[var(--fg-soft)]">
-          Free. No ads. No in-app purchases. Requires Apple Watch + iPhone.
-        </p>
+        <p class="mt-6 text-sm text-[var(--fg-soft)]">{t.hero.note}</p>
       </div>
 
       <div class="lg:col-span-5">
         <div class="relative mx-auto max-w-[360px]">
-          <!-- Watch face mock -->
           <div
             class="relative aspect-[1/1.18] rounded-[44px] border border-[var(--line-strong)] bg-[var(--card)] p-1.5 shadow-[0_30px_80px_-30px_rgba(10,132,255,0.45)]"
           >
@@ -89,7 +85,7 @@ const GH = 'https://github.com/alicehometech/repzen';
             >
               <div class="flex h-full w-full flex-col items-center justify-center px-6 text-white">
                 <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-[#8aa3ff]">
-                  Push-ups
+                  {t.hero.watch.exercise}
                 </p>
                 <div class="mt-3 flex items-end leading-none">
                   <span
@@ -101,16 +97,11 @@ const GH = 'https://github.com/alicehometech/repzen';
                   <span class="ml-2 mb-3 text-base text-[#8aa3ff]">/ 12</span>
                 </div>
                 <div class="mt-5 h-1.5 w-3/4 overflow-hidden rounded-full bg-white/10">
-                  <div
-                    class="h-full rounded-full bg-brand-gradient"
-                    style="width: 67%;"
-                  >
-                  </div>
+                  <div class="h-full rounded-full bg-brand-gradient" style="width: 67%;"></div>
                 </div>
-                <p class="mt-4 text-xs text-[#8aa3ff]">Set 2 of 3 · 23° tilt</p>
+                <p class="mt-4 text-xs text-[#8aa3ff]">{t.hero.watch.meta}</p>
               </div>
 
-              <!-- Faux digital crown -->
               <span
                 class="absolute right-[-10px] top-1/3 h-10 w-3 rounded-r-md bg-[#1a1f2e]"
                 aria-hidden="true"
@@ -118,13 +109,13 @@ const GH = 'https://github.com/alicehometech/repzen';
             </div>
           </div>
 
-          <!-- Floating chip -->
           <div
             class="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-[var(--line-strong)] bg-[var(--card)] px-4 py-2 text-xs font-medium text-[var(--fg-muted)] shadow-lg animate-float-slow"
           >
-            <span class="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 align-middle"
+            <span
+              class="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 align-middle"
             ></span>
-            Counting on-device
+            {t.hero.watch.chip}
           </div>
         </div>
       </div>

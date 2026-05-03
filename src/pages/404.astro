@@ -2,17 +2,19 @@
 import Base from '~/layouts/Base.astro';
 import Header from '~/components/Header.astro';
 import Footer from '~/components/Footer.astro';
+import { getDict } from '~/i18n';
+
+const lang = 'en' as const;
+const t = getDict(lang);
 ---
 
-<Base title="Page not found — RepZen" description="The page you were looking for doesn't exist." path="/404">
-  <Header />
+<Base title={`${t.notFound.title} — RepZen`} description={t.notFound.body} lang={lang} page="">
+  <Header t={t} lang={lang} page="" />
   <main class="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
-    <p class="eyebrow mb-3">404</p>
-    <h1 class="h1 mb-4">Page not found.</h1>
-    <p class="lede max-w-md">
-      The page you're looking for has moved or never existed. Try the home page.
-    </p>
-    <a href="/" class="btn-primary mt-8">Back to RepZen</a>
+    <p class="eyebrow mb-3">{t.notFound.eyebrow}</p>
+    <h1 class="h1 mb-4">{t.notFound.title}</h1>
+    <p class="lede max-w-md">{t.notFound.body}</p>
+    <a href="/" class="btn-primary mt-8">{t.notFound.cta}</a>
   </main>
-  <Footer />
+  <Footer t={t} lang={lang} />
 </Base>

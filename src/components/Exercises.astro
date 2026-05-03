@@ -1,31 +1,37 @@
 ---
-const exercises: { name: string; slug: string; manualOnly?: boolean }[] = [
-  { name: 'Push-ups', slug: 'push_up' },
-  { name: 'Sit-ups', slug: 'sit_up' },
-  { name: 'Squats', slug: 'squat' },
-  { name: 'Lunges', slug: 'lunge' },
-  { name: 'Jumping jacks', slug: 'jumping_jack' },
-  { name: 'Bicep curls', slug: 'bicep_curl' },
-  { name: 'Shoulder press', slug: 'shoulder_press' },
-  { name: 'Superman', slug: 'superman' },
-  { name: 'Tricep dips', slug: 'tricep_dip' },
-  { name: 'Pull-ups', slug: 'pull_up', manualOnly: true },
+import type { Dict } from '~/i18n';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+
+const exercises: { slug: string; manualOnly?: boolean }[] = [
+  { slug: 'push_up' },
+  { slug: 'sit_up' },
+  { slug: 'squat' },
+  { slug: 'lunge' },
+  { slug: 'jumping_jack' },
+  { slug: 'bicep_curl' },
+  { slug: 'shoulder_press' },
+  { slug: 'superman' },
+  { slug: 'tricep_dip' },
+  { slug: 'pull_up', manualOnly: true },
 ];
 ---
 
 <section id="exercises" class="section">
   <div class="container-page">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="eyebrow mb-4">Ten exercises</p>
-      <h2 class="h2 mb-4">What it counts</h2>
-      <p class="lede">
-        Each exercise has its own detector tuned to the specific motion of your wrist.
-      </p>
+      <p class="eyebrow mb-4">{t.exercises.eyebrow}</p>
+      <h2 class="h2 mb-4">{t.exercises.title}</h2>
+      <p class="lede">{t.exercises.lede}</p>
     </div>
 
     <ul
       class="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 md:grid-cols-5"
       role="list"
+      data-testid="exercise-grid"
     >
       {
         exercises.map((ex) => (
@@ -38,7 +44,7 @@ const exercises: { name: string; slug: string; manualOnly?: boolean }[] = [
                 />
                 <img
                   src={`/icons/exercise_${ex.slug}.png`}
-                  alt={`${ex.name} icon`}
+                  alt={t.exercises.names[ex.slug]}
                   width="120"
                   height="120"
                   loading="lazy"
@@ -47,23 +53,19 @@ const exercises: { name: string; slug: string; manualOnly?: boolean }[] = [
                 />
               </picture>
               {ex.manualOnly && (
-                <span
-                  class="absolute right-2 top-2 rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400"
-                  title="Wrist motion is too small to count reliably; manual count only."
-                >
-                  Manual
+                <span class="absolute right-2 top-2 rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
+                  {t.exercises.manualLabel}
                 </span>
               )}
             </div>
-            <span class="text-sm font-medium text-[var(--fg)]">{ex.name}</span>
+            <span class="text-sm font-medium text-[var(--fg)]">{t.exercises.names[ex.slug]}</span>
           </li>
         ))
       }
     </ul>
 
     <p class="mx-auto mt-10 max-w-2xl text-center text-sm text-[var(--fg-soft)]">
-      Pull-ups don't move the wrist enough to count reliably, so they're flagged as
-      manual-only — we'd rather say so than show a wrong number.
+      {t.exercises.note}
     </p>
   </div>
 </section>

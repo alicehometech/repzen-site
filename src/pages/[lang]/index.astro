@@ -9,10 +9,20 @@ import Screenshots from '~/components/Screenshots.astro';
 import BuiltBy from '~/components/BuiltBy.astro';
 import FAQ from '~/components/FAQ.astro';
 import Footer from '~/components/Footer.astro';
-import { getDict } from '~/i18n';
+import { dictionaries, locales, defaultLocale } from '~/i18n';
+import type { Locale } from '~/i18n';
 
-const lang = 'en' as const;
-const t = getDict(lang);
+export async function getStaticPaths() {
+  return locales
+    .filter((l) => l !== defaultLocale)
+    .map((lang) => ({
+      params: { lang },
+      props: { lang },
+    }));
+}
+
+const { lang } = Astro.props as { lang: Locale };
+const t = dictionaries[lang];
 ---
 
 <Base title={t.meta.title} description={t.meta.description} lang={lang} page="">

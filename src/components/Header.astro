@@ -1,10 +1,22 @@
 ---
+import type { Dict, Locale } from '~/i18n';
+import { localePath } from '~/i18n';
+import LangSwitcher from '~/components/LangSwitcher.astro';
+
+interface Props {
+  t: Dict;
+  lang: Locale;
+  page?: '' | 'privacy';
+}
+
+const { t, lang, page = '' } = Astro.props;
 const TESTFLIGHT = 'https://testflight.apple.com/join/T4ygaWD7';
+const home = localePath(lang, '');
 ---
 
 <header class="sticky top-0 z-30 border-b border-[var(--line)] bg-[var(--bg)]/85 backdrop-blur-md">
-  <div class="container-page flex h-16 items-center justify-between">
-    <a href="/" class="flex items-center gap-2.5 font-semibold tracking-tight" aria-label="RepZen home">
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <a href={home} class="flex items-center gap-2.5 font-semibold tracking-tight" aria-label={t.nav.home}>
       <img
         src="/icons/repzen-icon-1024.png"
         alt=""
@@ -17,20 +29,23 @@ const TESTFLIGHT = 'https://testflight.apple.com/join/T4ygaWD7';
       <span class="text-[17px]">RepZen</span>
     </a>
 
-    <nav class="hidden items-center gap-7 text-sm font-medium text-[var(--fg-muted)] sm:flex">
-      <a href="#exercises" class="transition hover:text-[var(--fg)]">Exercises</a>
-      <a href="#how" class="transition hover:text-[var(--fg)]">How it works</a>
-      <a href="#privacy" class="transition hover:text-[var(--fg)]">Privacy</a>
-      <a href="#faq" class="transition hover:text-[var(--fg)]">FAQ</a>
+    <nav class="hidden items-center gap-7 text-sm font-medium text-[var(--fg-muted)] md:flex">
+      <a href={`${home === '/' ? '' : home}#exercises`} class="transition hover:text-[var(--fg)]">{t.nav.exercises}</a>
+      <a href={`${home === '/' ? '' : home}#how`} class="transition hover:text-[var(--fg)]">{t.nav.how}</a>
+      <a href={`${home === '/' ? '' : home}#privacy`} class="transition hover:text-[var(--fg)]">{t.nav.privacy}</a>
+      <a href={`${home === '/' ? '' : home}#faq`} class="transition hover:text-[var(--fg)]">{t.nav.faq}</a>
     </nav>
 
-    <a
-      href={TESTFLIGHT}
-      class="btn-primary !px-4 !py-2 text-sm"
-      target="_blank"
-      rel="noopener"
-    >
-      Join TestFlight
-    </a>
+    <div class="flex items-center gap-2">
+      <LangSwitcher t={t} lang={lang} page={page} />
+      <a
+        href={TESTFLIGHT}
+        class="btn-primary !px-4 !py-2 text-sm"
+        target="_blank"
+        rel="noopener"
+      >
+        {t.nav.cta}
+      </a>
+    </div>
   </div>
 </header>

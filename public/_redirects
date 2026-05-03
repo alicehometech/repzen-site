@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+# (none yet — Astro emits /privacy/index.html which Cloudflare serves at both
+# /privacy and /privacy/, so no normalization rule is needed.)

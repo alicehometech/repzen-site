@@ -1,0 +1,21 @@
+# Cloudflare Pages headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=()
+  X-Frame-Options: DENY
+
+# Hashed Astro build assets — content-addressable, safe to cache forever
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Brand icons — change rarely, OK to cache long
+/icons/*
+  Cache-Control: public, max-age=2592000
+
+# HTML — short cache so updates propagate quickly
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

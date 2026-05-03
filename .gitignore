@@ -35,3 +35,6 @@ yarn-error.log*
 
 # Typecheck artefacts
 *.tsbuildinfo
+
+# Lock files (use npm; if you switch later, remove this)
+# (Keep package-lock.json checked in for reproducible builds)

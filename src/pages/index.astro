@@ -1,0 +1,44 @@
+---
+import Base from '~/layouts/Base.astro';
+import Header from '~/components/Header.astro';
+import Hero from '~/components/Hero.astro';
+import Exercises from '~/components/Exercises.astro';
+import HowItWorks from '~/components/HowItWorks.astro';
+import Privacy from '~/components/Privacy.astro';
+import Screenshots from '~/components/Screenshots.astro';
+import BuiltBy from '~/components/BuiltBy.astro';
+import FAQ from '~/components/FAQ.astro';
+import Footer from '~/components/Footer.astro';
+
+const title = 'RepZen — Counts your reps. Stays on your wrist.';
+const description =
+  "RepZen counts your push-ups, sit-ups, squats, and seven other bodyweight exercises automatically using your Apple Watch's motion sensors. No accounts. No analytics. No data leaving your device.";
+---
+
+<Base title={title} description={description} path="/">
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'RepZen',
+      operatingSystem: 'iOS, watchOS',
+      applicationCategory: 'HealthApplication',
+      description,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      url: 'https://repzen.app',
+    })}
+  />
+  <Header />
+  <main id="main">
+    <Hero />
+    <Exercises />
+    <HowItWorks />
+    <Privacy />
+    <Screenshots />
+    <BuiltBy />
+    <FAQ />
+  </main>
+  <Footer />
+</Base>

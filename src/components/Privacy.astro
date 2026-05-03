@@ -1,0 +1,96 @@
+---
+const points = [
+  {
+    title: 'No servers',
+    body: 'There is nowhere for your data to go even if we wanted it. RepZen has no backend.',
+  },
+  {
+    title: 'No accounts',
+    body: 'No sign-up, no email, no login. Install, grant motion permission, start counting.',
+  },
+  {
+    title: 'No analytics',
+    body: 'No tracking SDKs, no advertising IDs, no telemetry. Not Plausible. Nothing.',
+  },
+  {
+    title: 'No data leaves your device',
+    body: 'Motion, heart rate, and workouts stay on your iPhone and Watch. Period.',
+  },
+  {
+    title: 'Apple Health, optional',
+    body: 'Sync workouts to Apple Health if you want to. Otherwise nothing leaves the app.',
+  },
+  {
+    title: 'Free, no ads, no IAP',
+    body: 'Built by one developer. No subscription, no upsell, no premium tier.',
+  },
+];
+---
+
+<section id="privacy" class="section relative overflow-hidden">
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 opacity-60"
+    aria-hidden="true"
+    style="background: radial-gradient(60% 50% at 50% 0%, rgba(10,132,255,0.10) 0%, transparent 70%);"
+  >
+  </div>
+
+  <div class="container-page">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow mb-4">Privacy by design</p>
+      <h2 class="h2 mb-4">
+        Your motion. <span class="text-gradient">Your wrist.</span>
+        Your business.
+      </h2>
+      <p class="lede">
+        Most fitness apps push your data to a cloud — for sync, for analytics, for
+        monetization, "for backup." RepZen doesn't.
+      </p>
+    </div>
+
+    <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
+      {
+        points.map((p) => (
+          <li class="card flex gap-4">
+            <span
+              aria-hidden="true"
+              class="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-gradient text-white"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            <div>
+              <h3 class="text-base font-semibold">{p.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-[var(--fg-muted)]">{p.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-10 text-center">
+      <a
+        href="/privacy"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent hover:underline"
+      >
+        Read the full privacy policy
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14"></path>
+          <path d="m13 6 6 6-6 6"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

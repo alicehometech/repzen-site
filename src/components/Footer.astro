@@ -1,0 +1,35 @@
+---
+const GH = 'https://github.com/alicehometech/repzen';
+const EMAIL = 'mailto:lasmarthome18@gmail.com';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--line)] py-12">
+  <div class="container-page">
+    <div class="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
+      <div class="flex items-center gap-2.5">
+        <img
+          src="/icons/repzen-icon-1024.png"
+          alt=""
+          width="28"
+          height="28"
+          class="h-7 w-7 rounded-md"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="text-sm font-semibold tracking-tight">RepZen</span>
+      </div>
+
+      <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[var(--fg-muted)]">
+        <a href="/privacy" class="transition hover:text-[var(--fg)]">Privacy</a>
+        <a href={EMAIL} class="transition hover:text-[var(--fg)]">Contact</a>
+        <a href={GH} class="transition hover:text-[var(--fg)]" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+
+    <p class="mt-8 text-xs text-[var(--fg-soft)]">
+      © {year} RepZen. Built by one developer. Apple Watch, iPhone, and Apple Health are
+      trademarks of Apple Inc.
+    </p>
+  </div>
+</footer>

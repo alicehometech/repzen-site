@@ -1,0 +1,61 @@
+---
+const steps = [
+  {
+    n: '01',
+    title: 'Read the wrist',
+    body:
+      'The Apple Watch streams accelerometer, gyroscope, and attitude data — three signals that together describe how your wrist moves through space.',
+  },
+  {
+    n: '02',
+    title: 'Match the signature',
+    body:
+      'Every exercise has a distinct motion. A sit-up tilts the watch through 60°. A push-up rotates the wrist 20°. A squat sends a clean acceleration pulse at the bottom and the top.',
+  },
+  {
+    n: '03',
+    title: 'Count the rep',
+    body:
+      'A different detector for each exercise watches its signature in real time. Cross the threshold, the count ticks up. Cross back, it arms again. No cloud round-trip.',
+  },
+];
+---
+
+<section id="how" class="section bg-[var(--card-soft)]">
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow mb-4">How it works</p>
+      <h2 class="h2 mb-4">Sensors, not guesses.</h2>
+      <p class="lede">
+        No camera. No cloud ML. Just the same motion sensors Apple ships in every Watch,
+        read with a different detector for each exercise.
+      </p>
+    </div>
+
+    <ol class="mt-14 grid gap-6 md:grid-cols-3" role="list">
+      {
+        steps.map((step) => (
+          <li class="card relative h-full">
+            <span class="text-gradient text-sm font-bold tracking-[0.18em]">
+              {step.n}
+            </span>
+            <h3 class="h3 mt-3">{step.title}</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-[var(--fg-muted)]">
+              {step.body}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div
+      class="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border border-[var(--line)] bg-[var(--card)] px-6 py-4 text-sm text-[var(--fg-muted)]"
+    >
+      <span><strong class="text-[var(--fg)]">Sensitivity slider</strong> 1–10 per exercise</span>
+      <span aria-hidden="true">·</span>
+      <span><strong class="text-[var(--fg)]">Live diagnostics</strong> on the Watch</span>
+      <span aria-hidden="true">·</span>
+      <span><strong class="text-[var(--fg)]">No black box</strong> — see what's detecting</span>
+    </div>
+  </div>
+</section>

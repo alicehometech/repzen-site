@@ -1,0 +1,175 @@
+---
+import Base from '~/layouts/Base.astro';
+import Header from '~/components/Header.astro';
+import Footer from '~/components/Footer.astro';
+
+const title = 'Privacy Policy — RepZen';
+const description =
+  'RepZen takes a data-minimal approach: all data stays on your device unless you explicitly sync it to Apple Health. No servers, no accounts, no third-party analytics.';
+
+// Inline the privacy policy markdown rendered as HTML.
+// Source of truth is /src/content/privacy.md — kept here in template form so
+// Astro's static build doesn't need a markdown plugin for a single file.
+---
+
+<Base title={title} description={description} path="/privacy">
+  <Header />
+  <main class="container-page py-16 sm:py-20">
+    <article
+      class="prose-page mx-auto max-w-3xl"
+    >
+      <p class="eyebrow mb-4">Legal</p>
+      <h1 class="h1 mb-3 !text-4xl">Privacy Policy</h1>
+      <p class="text-sm text-[var(--fg-soft)]">Last updated: May 2, 2026</p>
+
+      <p class="lede mt-8">
+        RepZen is a workout tracking application for Apple Watch and iPhone that counts
+        exercise repetitions using the device's motion sensors. We take a data-minimal
+        approach: <strong>all data stays on your device</strong> unless you explicitly
+        sync it to Apple Health.
+      </p>
+
+      <h2>What we collect and why</h2>
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Source</th>
+              <th>Why</th>
+              <th>Where it lives</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Motion data (accelerometer, gyroscope, attitude)</td>
+              <td>Apple Watch IMU</td>
+              <td>Counting exercise reps</td>
+              <td>On-device only — never transmitted off your device</td>
+            </tr>
+            <tr>
+              <td>Heart rate</td>
+              <td>Apple HealthKit</td>
+              <td>Showing your HR during workouts</td>
+              <td>On-device only</td>
+            </tr>
+            <tr>
+              <td>Step count</td>
+              <td>Apple HealthKit</td>
+              <td>Showing today's activity</td>
+              <td>On-device only</td>
+            </tr>
+            <tr>
+              <td>Workout history</td>
+              <td>Local app storage + Apple Health</td>
+              <td>History view, weekly goals</td>
+              <td>On-device + Apple Health (your control)</td>
+            </tr>
+            <tr>
+              <td>Profile (age, weight, height, sex)</td>
+              <td>You enter, or pre-filled from Apple Health</td>
+              <td>Personalizing the app</td>
+              <td>On-device only</td>
+            </tr>
+            <tr>
+              <td>Plan settings, sensitivity preferences</td>
+              <td>You set in the app</td>
+              <td>App configuration</td>
+              <td>On-device only via App Group container</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What we do NOT do</h2>
+      <ul>
+        <li>We do <strong>not</strong> transmit your motion, health, or workout data to any server.</li>
+        <li>We do <strong>not</strong> use third-party analytics, ads, or tracking SDKs.</li>
+        <li>We do <strong>not</strong> share your data with anyone.</li>
+        <li>We do <strong>not</strong> create user accounts. There is no login.</li>
+        <li>We do <strong>not</strong> access your contacts, photos, location, or microphone.</li>
+      </ul>
+
+      <h2>Apple HealthKit</h2>
+      <p>
+        If you grant the app permission, RepZen reads from and writes to Apple HealthKit
+        on your device. Apple HealthKit data is encrypted at rest and syncs only between
+        your Apple devices via your iCloud account, controlled by Apple's privacy
+        framework. RepZen never sees this data outside your device.
+      </p>
+      <p>
+        You can revoke RepZen's HealthKit access at any time in:
+        <strong>Apple Health app → Sharing → Apps → RepZen</strong>
+      </p>
+
+      <h2>Apple Music</h2>
+      <p>
+        If you choose to play music during workouts, RepZen requests permission to play
+        tracks from your Apple Music library. The app does not transmit or store your
+        music selections.
+      </p>
+
+      <h2>Watch ↔ iPhone sync</h2>
+      <p>
+        The Apple Watch app and iPhone app sync settings and completed workouts between
+        each other using Apple's <code>WCSession</code> framework. This data travels
+        directly between your paired devices via Bluetooth/Wi-Fi using Apple's encrypted
+        local channel — it does not pass through any RepZen server.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        RepZen does not knowingly collect data from children under 13. The app has no
+        user accounts and no server, so no profile data ever leaves the device.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        We will update this page if our data practices change. The "Last updated" date
+        at the top reflects the most recent revision.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        For privacy questions, contact the developer at:
+        <a href="mailto:lasmarthome18@gmail.com">lasmarthome18@gmail.com</a>
+      </p>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .prose-page h2 {
+    @apply mt-12 mb-4 text-2xl font-bold tracking-tight;
+  }
+  .prose-page p {
+    @apply mt-4 text-[16px] leading-relaxed text-[var(--fg-muted)];
+  }
+  .prose-page ul {
+    @apply mt-4 space-y-2 pl-5 text-[16px] leading-relaxed text-[var(--fg-muted)];
+    list-style: disc;
+  }
+  .prose-page strong {
+    color: var(--fg);
+  }
+  .prose-page a {
+    color: #1a6fff;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+  }
+  .prose-page code {
+    @apply rounded bg-[var(--card-soft)] px-1.5 py-0.5 text-[0.92em] font-mono;
+  }
+  .prose-page table {
+    @apply mt-6 w-full border-collapse text-sm;
+  }
+  .prose-page th,
+  .prose-page td {
+    @apply border border-[var(--line)] px-3 py-2 text-left align-top text-[var(--fg-muted)];
+  }
+  .prose-page th {
+    @apply bg-[var(--card-soft)] font-semibold text-[var(--fg)];
+  }
+</style>

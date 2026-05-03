@@ -68,7 +68,22 @@
       "Read(/Users/shark/workspace/repzen/**)",
       "Read(~/workspace/repzen/**)",
       "Read(/Users/shark/workspace/repzen-site/**)",
-      "Read(~/workspace/repzen-site/**)"
+      "Read(~/workspace/repzen-site/**)",
+      "Write(/Users/shark/workspace/repzen-site/**)",
+      "Write(~/workspace/repzen-site/**)",
+      "Edit(/Users/shark/workspace/repzen-site/**)",
+      "Edit(~/workspace/repzen-site/**)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:vercel.app)",
+      "WebFetch(domain:astro.build)",
+      "WebFetch(domain:docs.astro.build)",
+      "WebFetch(domain:tailwindcss.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:npmjs.com)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:apple.com)",
+      "WebFetch(domain:developer.apple.com)"
     ]
   }
 }

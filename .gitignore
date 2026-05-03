@@ -43,3 +43,7 @@ yarn-error.log*
 
 # Lock files (use npm; if you switch later, remove this)
 # (Keep package-lock.json checked in for reproducible builds)
+
+.dev.vars*
+!.dev.vars.example
+!.env.example
